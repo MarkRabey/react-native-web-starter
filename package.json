@@ -1,0 +1,25 @@
+{
+  "name": "react-native-web-starter",
+  "version": "0.0.1",
+  "description": "A very basic, somewhat opinionated, template for React Native Web",
+  "scripts": {
+    "test": "exit 0"
+  },
+  "files": [
+    "template",
+    "template.config.js"
+  ],
+  "keywords": [
+    "react-native",
+    "react-native-web",
+    "typescript",
+    "template",
+    "starter"
+  ],
+  "author": "Mark Rabey <mark@markrabey.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MarkRabey/react-native-web-starter/issues"
+  },
+  "homepage": "https://github.com/MarkRabey/react-native-web-starter#readme"
+}
