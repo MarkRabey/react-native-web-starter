@@ -74,7 +74,7 @@ jobs:
             ### Bug Fixes
             - [ ] TODO
           labels: "Type: Release"
-          branch: "develop"
+          branch: "release/next"
           base: "main"
       - name: Check outputs
         run: |
