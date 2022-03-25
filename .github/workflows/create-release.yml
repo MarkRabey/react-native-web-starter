@@ -62,7 +62,7 @@ jobs:
             - [ ] TODO
             ### Bug Fixes
             - [ ] TODO
-          labels: "Type: Release"
+          labels: "Type: Release (${{env.VERSION_TYPE}})"
           branch: "release/${{env.VERSION_TYPE}}"
           delete-branch: true
       - name: Check outputs
