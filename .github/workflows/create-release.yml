@@ -39,7 +39,7 @@ jobs:
         run: echo "VERSION_TYPE=minor" >> $GITHUB_ENV
       - if: startsWith(github.event.comment.body, '/create release major')
         run: echo "VERSION_TYPE=major" >> $GITHUB_ENV
-      - run: yarn version --${{env.VERSION_TYPE}}
+      - run: yarn version --${{env.VERSION_TYPE}} --no-git-tag-version
       - name: Set current CHANGELOG to output
         id: changelog
         shell: bash -ex {0}
