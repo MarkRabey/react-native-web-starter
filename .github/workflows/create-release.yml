@@ -45,9 +45,9 @@ jobs:
             echo "::set-output name=release_type::patch"
           fi
         env:
-          IS_PATCH: startsWith(github.event.comment.body, '/create release patch')
-          IS_MINOR: startsWith(github.event.comment.body, '/create release minor')
-          IS_MAJOR: startsWith(github.event.comment.body, '/create release major')
+          IS_PATCH: ${{startsWith(github.event.comment.body, '/create release patch')}}
+          IS_MINOR: ${{startsWith(github.event.comment.body, '/create release minor')}}
+          IS_MAJOR: ${{startsWith(github.event.comment.body, '/create release major')}}
       - name: Version Up
         run: yarn version --${{steps.type_check.release_type}}
       - name: Set current CHANGELOG to output
