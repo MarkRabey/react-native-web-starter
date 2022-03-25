@@ -27,29 +27,18 @@ jobs:
         run: yarn install
       - name: Git Identity
         run: |
-          git config --global user.name '${GITHUB_ACTOR}'
-          git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'
+          git config --global user.name '${{ github.actor }}'
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ github.actor }}
-      - name: Set Version Type
-        id: type_check
-        run: |
-          if [${IS_PATCH}]; then
-            echo "::set-output name=release_type::patch"
-          elif [${IS_MINOR}]; then
-            echo "::set-output name=release_type::minor"
-          elif [${IS_MAJOR}]; then
-            echo "::set-output name=release_type::major"
-          else
-            echo "::set-output name=release_type::patch"
-          fi
-        env:
-          IS_PATCH: startsWith(github.event.comment.body, '/create release patch')
-          IS_MINOR: startsWith(github.event.comment.body, '/create release minor')
-          IS_MAJOR: startsWith(github.event.comment.body, '/create release major')
+      # Define ${VERSION_TYPE}
       - name: Version Up
-        run: yarn version --${{steps.type_check.release_type}}
+        run: echo "VERSION_TYPE=patch" >> $GITHUB_ENV
+      - if: startsWith(github.event.comment.body, '/create release minor')
+        run: echo "VERSION_TYPE=minor" >> $GITHUB_ENV
+      - if: startsWith(github.event.comment.body, '/create release major')
+        run: echo "VERSION_TYPE=major" >> $GITHUB_ENV
+      - run: yarn version --${{env.VERSION_TYPE}} --no-git-tag-version
       - name: Set current CHANGELOG to output
         id: changelog
         shell: bash -ex {0}
@@ -58,7 +47,7 @@ jobs:
           echo "::set-output name=version::${version}"
       - name: Create Pull Request
         id: cpr
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Update v${{ steps.changelog.outputs.version }}"
@@ -74,8 +63,8 @@ jobs:
             ### Bug Fixes
             - [ ] TODO
           labels: "Type: Release"
-          branch: "main"
-          request-to-parent: false
+          branch: "release/${{env.VERSION_TYPE}}"
+          delete-branch: true
       - name: Check outputs
         run: |
           echo "Pull Request Number - ${{ env.PULL_REQUEST_NUMBER }}"
