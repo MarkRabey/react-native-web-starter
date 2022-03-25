@@ -4,7 +4,7 @@
   "description": "A very basic, somewhat opinionated, template for React Native Web",
   "scripts": {
     "postversion": "yarn run commit-version",
-    "commit-version": "git add . && git commit -m \"chore(release): publish `node -p 'require(\"./package.json\").version'`\"",
+    "commit-version": "git add . && git commit -m \"chore(release): publish `node -p 'require(\"./package.json\").version'`\" && git push",
     "test": "exit 0"
   },
   "files": [
