@@ -23,7 +23,7 @@ npx react-native init MyApp --template react-native-web-starter
 
 A few things I'm considering adding to the template:
 
-- GitHub Actions (this might be _too_ opinionated - then again, this is really more for me than anyone else)
+- GitHub Actions - this might be _too_ opinionated - then again, this is really more for me than anyone else.
 - Redux - a lot of projects use Redux, but a lot don't. Maybe a separate template?
 
 ## License
