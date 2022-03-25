@@ -74,7 +74,8 @@ jobs:
             ### Bug Fixes
             - [ ] TODO
           labels: "Type: Release"
-          branch: "main"
+          branch: "develop"
+          base: "main"
           request-to-parent: false
       - name: Check outputs
         run: |
