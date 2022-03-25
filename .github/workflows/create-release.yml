@@ -76,7 +76,6 @@ jobs:
           labels: "Type: Release"
           branch: "develop"
           base: "main"
-          request-to-parent: false
       - name: Check outputs
         run: |
           echo "Pull Request Number - ${{ env.PULL_REQUEST_NUMBER }}"
