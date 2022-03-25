@@ -32,24 +32,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
-      - name: Set Version Type
-        id: type_check
-        run: |
-          if [${IS_PATCH}]; then
-            echo "::set-output name=release_type::patch"
-          elif [${IS_MINOR}]; then
-            echo "::set-output name=release_type::minor"
-          elif [${IS_MAJOR}]; then
-            echo "::set-output name=release_type::major"
-          else
-            echo "::set-output name=release_type::patch"
-          fi
-        env:
-          IS_PATCH: ${{startsWith(github.event.comment.body, '/create release patch')}}
-          IS_MINOR: ${{startsWith(github.event.comment.body, '/create release minor')}}
-          IS_MAJOR: ${{startsWith(github.event.comment.body, '/create release major')}}
+      # Define ${VERSION_TYPE}
       - name: Version Up
-        run: yarn version --${{steps.type_check.release_type}}
+        run: echo "VERSION_TYPE=patch" >> $GITHUB_ENV
+      - if: startsWith(github.event.comment.body, '/create release minor')
+        run: echo "VERSION_TYPE=minor" >> $GITHUB_ENV
+      - if: startsWith(github.event.comment.body, '/create release major')
+        run: echo "VERSION_TYPE=major" >> $GITHUB_ENV
+      - run: yarn version --${{env.VERSION_TYPE}}
       - name: Set current CHANGELOG to output
         id: changelog
         shell: bash -ex {0}
