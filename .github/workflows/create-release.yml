@@ -64,7 +64,6 @@ jobs:
             - [ ] TODO
           labels: "Type: Release"
           branch: "release/${{env.VERSION_TYPE}}"
-          base: "main"
           delete-branch: true
       - name: Check outputs
         run: |
