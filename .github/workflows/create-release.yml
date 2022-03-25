@@ -64,8 +64,9 @@ jobs:
             ### Bug Fixes
             - [ ] TODO
           labels: "Type: Release"
-          branch: "release/next"
+          branch: "release/${{env.VERSION_TYPE}}"
           base: "main"
+          delete-branch: true
       - name: Check outputs
         run: |
           echo "Pull Request Number - ${{ env.PULL_REQUEST_NUMBER }}"
