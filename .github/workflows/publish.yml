@@ -2,8 +2,9 @@
 
 name: Publish
 on:
-  push:
+  pull_request:
     branches: [main]
+    types: [closed]
 
 permissions:
   contents: write
@@ -15,6 +16,10 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     steps:
+      - if: github.event.pull_request.merged == false
+        run: |
+          echo "Pull Request was not merged."
+          exit 1
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Node ${{ matrix.node_version }}
