@@ -1,6 +1,6 @@
 {
   "name": "react-native-web-starter",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A very basic, somewhat opinionated, template for React Native Web",
   "scripts": {
     "postversion": "yarn run commit-version",
