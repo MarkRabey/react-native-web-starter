@@ -3,7 +3,7 @@
 # React Native Web Starter
 
 [![npm](https://img.shields.io/npm/v/react-native-web-starter)](https://www.npmjs.com/react-native-web-starter)
-![NPM](https://img.shields.io/npm/l/react-native-web-starter)
+[![NPM](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/MarkRabey/react-native-web-starter/blob/master/LICENSE)
 
 > A very basic, somewhat opinionated, template for React Native Web
 
